@@ -19,10 +19,10 @@ services:
       - ./frontend:/app/templates
 
   mysql:
-    image: mysql:5.7
-    container_name: mysql_db
+    image: mysql:latest
+    container_name: mydb
     environment:
-      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: devops_exam
     ports:
       - "3306:3306"
@@ -30,7 +30,7 @@ services:
       - mysql_data:/var/lib/mysql
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-uroot", "-prootpass"]
+      test: ["CMD", "mysqladmin", "ping", "-uroot", "-ppassword"]
       interval: 5s
       timeout: 10s
       retries: 10
